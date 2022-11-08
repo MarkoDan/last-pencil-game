@@ -3,7 +3,7 @@ numbers = [1, 2, 3]
 print('How many pencils would you like to use:')
 while True:
     number_of_pencils = input()
-    if str(number_of_pencils) in string.ascii_letters:
+    if str(number_of_pencils) in string.ascii_letters or number_of_pencils in string.punctuation or not number_of_pencils.isdigit():
         print('The number of pencils should be numeric')
         continue
     elif int(number_of_pencils) <= 0:
@@ -22,48 +22,79 @@ while True:
             while number_of_pencils > 0:
 
                 print(f"{player_choise}'s turn")
-                number = int(input())
-                if number not in numbers:
+                number = input()
+                if number not in string.digits:
                     print(f"Possible values: {numbers}")
+                    continue
+                elif int(number) not in numbers:
+                    print(f"Possible values: {numbers}")
+                    continue
                 else:
+                    number = int(number)
                     number_of_pencils = number_of_pencils - number
                     print(number_of_pencils * '|')
-
-                if player_choise == player1 and number_of_pencils != 0:
-                    print(f"{player2}'s turn")
-                    number = int(input())
-                    if number not in numbers:
-                        print(f"Possible values: {numbers}")
+                    if number_of_pencils == 0:
+                        print(f'{player_choise} won!')
+                        break
                     else:
-                        if number > number_of_pencils:
-                            print('To many pencils were taken')
-                        else:
-                            number_of_pencils = number_of_pencils - number
-                            print(number_of_pencils * '|')
-                        if number_of_pencils == 0:
-                            print(f'{player2} won!')
 
-
-                elif player_choise == player2 and number_of_pencils != 0:
-                    print(f"{player1}'s turn")
-                    number = int(input())
-                    if number not in numbers:
-                        print(f"Possible values: {numbers}")
-                    else:
-                        if number > number_of_pencils:
-                            print('To many pencils were taken')
-                        else:
-                            number_of_pencils = number_of_pencils - number
-                            print(number_of_pencils * '|')
-                        if number_of_pencils == 0:
-                            print(f'{player1} won!')
-
-            break
+                        if player_choise == player1 and number_of_pencils != 0:
+                            while True:
+                                print(f"{player2}'s turn")
+                                number = input()
+                                if number not in string.digits:
+                                    print(f"Possible values: {numbers}") 
+                                    continue
+                                elif int(number) not in numbers:
+                                    print(f"Possible values: {numbers}") 
+                                    continue
+                                else:
+                                    number = int(number)
+                                    if number > number_of_pencils:
+                                        print('To many pencils were taken')
+                                        print(f'{player1} won!')
+                                        break
+                                    else:
+                                        number_of_pencils = number_of_pencils - number
+                                        print(number_of_pencils * '|')
+                                        if number_of_pencils <= 0:
+                                            print(f'{player2} won!')
+                                    break
+                            #break
+                        elif player_choise == player2 and number_of_pencils != 0:
+                            while True:
+                                print(f"{player1}'s turn")
+                                number = input()
+                                if number not in string.digits:
+                                    print(f"Possible values: {numbers}") 
+                                    continue
+                                elif int(number) not in numbers:
+                                    print(f"Possible values: {numbers}") 
+                                    continue
+                                else:
+                                    number = int(number)
+                                    if number > number_of_pencils:
+                                        print('To many pencils were taken')
+                                        print(f'{player2} won!')
+                                        break
+                                    else:
+                                        number_of_pencils = number_of_pencils - number
+                                        print(number_of_pencils * '|')
+                                    if number_of_pencils <= 0:
+                                        print(f'{player1} won!')
+                                break
+                            #break
+            
+            break           
 
 
         else:
             print(f"Choose between '{player1}' or '{player2}'")
-
-
-
+    
     break
+    
+    
+        
+
+
+    
