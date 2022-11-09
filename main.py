@@ -36,6 +36,16 @@ while True:
                     if number_of_pencils == 0:
                         print(f'{player_choise} won!')
                         break
+                    elif number_of_pencils < 0:
+                        if player_choise == player1:
+                            print('To many pencils were taken')
+                            print(f'{player2} won!')
+                            break
+
+                        else:
+                            print('To many pencils were taken')
+                            print(f'{player1} won!')
+                            break
                     else:
 
                         if player_choise == player1 and number_of_pencils != 0:
@@ -59,8 +69,10 @@ while True:
                                         print(number_of_pencils * '|')
                                         if number_of_pencils <= 0:
                                             print(f'{player2} won!')
-                                    break
-                            #break
+
+
+                                break
+
                         elif player_choise == player2 and number_of_pencils != 0:
                             while True:
                                 print(f"{player1}'s turn")
@@ -82,11 +94,14 @@ while True:
                                         print(number_of_pencils * '|')
                                     if number_of_pencils <= 0:
                                         print(f'{player1} won!')
-                                break
-                            #break
-            
-            break           
 
+
+                                break
+
+                    if number_of_pencils <= 0:
+                        break
+
+            break
 
         else:
             print(f"Choose between '{player1}' or '{player2}'")
