@@ -1,115 +1,53 @@
-import string
-numbers = [1, 2, 3]
+import random
 print('How many pencils would you like to use:')
 while True:
-    number_of_pencils = input()
-    if str(number_of_pencils) in string.ascii_letters or number_of_pencils in string.punctuation or not number_of_pencils.isdigit():
+    pencils = input()
+    if not pencils.isdigit():
         print('The number of pencils should be numeric')
-        continue
-    elif int(number_of_pencils) <= 0:
+    elif int(pencils) < 1:
         print('The number of pencils should be positive')
-        continue
     else:
-        number_of_pencils = int(number_of_pencils)
-    player1 = 'John'
-    player2 = 'Jack'
-    print(f'Who will be the first ({player1}, {player2})')
+        pencils = int(pencils)
+        break
 
+name = input('Who will be the first (John, Jack):')
+while name not in ('John', 'Jack'):
+    print('Choose between John and Jack')
+    name = input()
+
+while True:
+    if pencils < 1:
+        print(f'{name} won!')
+        break
+    print('|' * pencils)
+    print(f'{name}\'s turn')
     while True:
-        player_choise = input()
-        if player_choise == player1 or player_choise == player2:
-            print(number_of_pencils * '|')
-            while number_of_pencils > 0:
-
-                print(f"{player_choise}'s turn")
-                number = input()
-                if number not in string.digits:
-                    print(f"Possible values: {numbers}")
-                    continue
-                elif int(number) not in numbers:
-                    print(f"Possible values: {numbers}")
-                    continue
-                else:
-                    number = int(number)
-                    number_of_pencils = number_of_pencils - number
-                    print(number_of_pencils * '|')
-                    if number_of_pencils == 0:
-                        print(f'{player_choise} won!')
-                        break
-                    elif number_of_pencils < 0:
-                        if player_choise == player1:
-                            print('To many pencils were taken')
-                            print(f'{player2} won!')
-                            break
-
-                        else:
-                            print('To many pencils were taken')
-                            print(f'{player1} won!')
-                            break
-                    else:
-
-                        if player_choise == player1 and number_of_pencils != 0:
-                            while True:
-                                print(f"{player2}'s turn")
-                                number = input()
-                                if number not in string.digits:
-                                    print(f"Possible values: {numbers}") 
-                                    continue
-                                elif int(number) not in numbers:
-                                    print(f"Possible values: {numbers}") 
-                                    continue
-                                else:
-                                    number = int(number)
-                                    if number > number_of_pencils:
-                                        print('To many pencils were taken')
-                                        print(f'{player1} won!')
-                                        break
-                                    else:
-                                        number_of_pencils = number_of_pencils - number
-                                        print(number_of_pencils * '|')
-                                        if number_of_pencils <= 0:
-                                            print(f'{player2} won!')
-
-
-                                break
-
-                        elif player_choise == player2 and number_of_pencils != 0:
-                            while True:
-                                print(f"{player1}'s turn")
-                                number = input()
-                                if number not in string.digits:
-                                    print(f"Possible values: {numbers}") 
-                                    continue
-                                elif int(number) not in numbers:
-                                    print(f"Possible values: {numbers}") 
-                                    continue
-                                else:
-                                    number = int(number)
-                                    if number > number_of_pencils:
-                                        print('To many pencils were taken')
-                                        print(f'{player2} won!')
-                                        break
-                                    else:
-                                        number_of_pencils = number_of_pencils - number
-                                        print(number_of_pencils * '|')
-                                    if number_of_pencils <= 0:
-                                        print(f'{player1} won!')
-
-
-                                break
-
-                    if number_of_pencils <= 0:
-                        break
-
+        if name == 'Jack':
+            if pencils % 4 == 0:
+                print('3')
+                pencils -= 3
+            elif pencils % 4 == 3:
+                print('2')
+                pencils -= 2
+            elif pencils % 4 == 2:
+                print('1')
+                pencils -= 1
+            elif pencils == 1:
+                print(pencils)
+                pencils -= 1
+            else:
+                random_choise = random.randint(1,3)
+                print(random_choise)
+                pencils -= random_choise
             break
-
         else:
-            print(f"Choose between '{player1}' or '{player2}'")
+            choice = input()
+            if choice not in ('1', '2', '3'):
+                print("Possible values: '1', '2' or '3'")
+            elif int(choice) > pencils:
+                print('Too many pencils were taken')
+            else:
+                pencils -= int(choice)
+                break
     
-    break
-    
-    
-        
-
-
-    
+    name = 'John' if name == 'Jack' else 'Jack'
